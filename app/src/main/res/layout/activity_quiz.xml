@@ -9,19 +9,21 @@
     tools:context="br.ifpe.kaio.geoquiz.QuizActivity">
 
     <TextView
+        android:id="@+id/pergunta_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:padding="24dp"
+        android:padding="20dp"
         android:textAlignment="center"
         android:textColor="@color/azul"
-        android:textSize="18sp"
-        android:text="@string/questao" />
+        android:textSize="19sp"
+        android:text="@string/pergunta1" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:orientation="horizontal">
 
         <Button
@@ -45,5 +47,14 @@
             android:text="@string/btn_falso"/>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_proximo"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/branco"
+        android:textStyle="bold"
+        android:text="@string/btn_avancar"/>
 
 </LinearLayout>

@@ -1,8 +1,15 @@
 <resources>
     <string name="app_name">GeoQuiz</string>
-    <string name="questao">O android é um sistema operacional da Google?</string>
     <string name="btn_verdadeiro">Verdadeiro</string>
     <string name="btn_falso">Falso</string>
+    <string name="btn_avancar">Avançar</string>
     <string name="correto_toast">Correto!</string>
-    <string name="incorreto_toast">Erro, pois é verdade.</string>
+    <string name="incorreto_toast">Incorreto!</string>
+
+    <!-- Questoes do GeoQuiz -->
+    <string name="pergunta1">A cidade de Campina Grande fica localizado no estado da Paraíba?</string>
+    <string name="pergunta2">A floresta Amazônica passa por 8 estados?</string>
+    <string name="pergunta3">O estado do Amapá faz fronteira com dois estados?</string>
+    <string name="pergunta4">A cidade do Rio de Janeiro já foi a capital do Brasil?</string>
+    <string name="pergunta5">Pernambuco é o segundo maior estado em território do Nordeste?</string>
 </resources>
