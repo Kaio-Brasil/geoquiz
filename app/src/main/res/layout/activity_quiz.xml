@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="16dp"
+    tools:context="br.ifpe.kaio.geoquiz.QuizActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:padding="24dp"
+        android:textAlignment="center"
+        android:textColor="@color/azul"
+        android:textSize="18sp"
+        android:text="@string/questao" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_true"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="5dp"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/branco"
+            android:textStyle="bold"
+            android:text="@string/btn_verdadeiro"/>
+
+        <Button
+            android:id="@+id/btn_false"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="5dp"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/branco"
+            android:textStyle="bold"
+            android:text="@string/btn_falso"/>
+
+    </LinearLayout>
+
+</LinearLayout>

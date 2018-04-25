@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">GeoQuiz</string>
+    <string name="questao">O android é um sistema operacional da Google?</string>
+    <string name="btn_verdadeiro">Verdadeiro</string>
+    <string name="btn_falso">Falso</string>
+    <string name="correto_toast">Correto!</string>
+    <string name="incorreto_toast">Erro, pois é verdade.</string>
+</resources>
