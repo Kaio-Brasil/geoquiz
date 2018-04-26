@@ -4,11 +4,11 @@ package br.ifpe.kaio.geoquiz;
  * Created by Kaio on 25/04/2018.
  */
 
-public class Questoes {
+public class Questao {
     private int mTextoResId;
     private boolean mResposta;
 
-    public Questoes(int mTextoResId, boolean mResposta) {
+    public Questao(int mTextoResId, boolean mResposta) {
         this.mTextoResId = mTextoResId;
         this.mResposta = mResposta;
     }

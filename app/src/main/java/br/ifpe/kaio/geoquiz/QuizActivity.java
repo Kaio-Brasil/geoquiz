@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import java.util.Random;
 
 public class QuizActivity extends AppCompatActivity {
+    private static final String TAG = "QuizActivity";
     private Button mBtnVerdadeiro;
     private Button mBtnFalso;
     private ImageButton mBtnAnterior;
@@ -21,17 +23,17 @@ public class QuizActivity extends AppCompatActivity {
 
     private TextView mQuestoesTextView;
 
-    private Questoes[] mBancoPerguntas = new Questoes[] {
-            new Questoes(R.string.pergunta1, true),
-            new Questoes(R.string.pergunta2, true),
-            new Questoes(R.string.pergunta3, false),
-            new Questoes(R.string.pergunta4, true),
-            new Questoes(R.string.pergunta5, false),
-            new Questoes(R.string.pergunta6, true),
-            new Questoes(R.string.pergunta7, true),
-            new Questoes(R.string.pergunta8, true),
-            new Questoes(R.string.pergunta9, false),
-            new Questoes(R.string.pergunta10, false)
+    private Questao[] mBancoPerguntas = new Questao[] {
+            new Questao(R.string.pergunta1, true),
+            new Questao(R.string.pergunta2, true),
+            new Questao(R.string.pergunta3, false),
+            new Questao(R.string.pergunta4, true),
+            new Questao(R.string.pergunta5, false),
+            new Questao(R.string.pergunta6, true),
+            new Questao(R.string.pergunta7, true),
+            new Questao(R.string.pergunta8, true),
+            new Questao(R.string.pergunta9, false),
+            new Questao(R.string.pergunta10, false)
     };
 
     int mCurrentIndex = 0;
@@ -40,6 +42,7 @@ public class QuizActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate(Bundle) called");
         setContentView(R.layout.activity_quiz);
 
         embaralharPerguntas();
@@ -96,6 +99,7 @@ public class QuizActivity extends AppCompatActivity {
                 atualizarPergunta();
             }
         });
+
     }
 
     private void atualizarPergunta() {
@@ -122,14 +126,14 @@ public class QuizActivity extends AppCompatActivity {
 
             AlertDialog alerta = new AlertDialog.Builder(this).create();
             alerta.setTitle(R.string.pontuacao);
-            alerta.setMessage("Sua pontuação foi "+mPontuacao);
+            alerta.setMessage("Você acertou "+ mPontuacao +" perguntas.");
             alerta.setButton(Dialog.BUTTON_POSITIVE, "Ok", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     finish();
                 }
             });
-            
+
             alerta.show();
         }
     }
@@ -147,7 +151,7 @@ public class QuizActivity extends AppCompatActivity {
             int j = new Random().nextInt(mBancoPerguntas.length);
 
             //Troca o conteudo das questões
-            Questoes temporario = mBancoPerguntas[i];
+            Questao temporario = mBancoPerguntas[i];
             mBancoPerguntas[i] = mBancoPerguntas[j];
             mBancoPerguntas[j] = temporario;
         }
@@ -155,7 +159,7 @@ public class QuizActivity extends AppCompatActivity {
 
     private void removerPerguntas() {
         if(mBancoPerguntas.length != 0) {
-            Questoes[] arrAuxiliar = new Questoes[mBancoPerguntas.length - 1];
+            Questao[] arrAuxiliar = new Questao[mBancoPerguntas.length - 1];
             int index = 0;
 
             for (int i = 0; i<mBancoPerguntas.length; i++) {
@@ -166,6 +170,34 @@ public class QuizActivity extends AppCompatActivity {
             }
             mBancoPerguntas = arrAuxiliar;
         }
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        Log.d(TAG, "onStart() called");
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Log.d(TAG, "onResume() called");
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        Log.d(TAG, "onPause() called");
+    }
+    @Override
+    protected void onStop(){
+        super.onStop();
+        Log.d(TAG, "onStop() called");
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        Log.d(TAG, "onDestroy() called");
     }
 
 }
