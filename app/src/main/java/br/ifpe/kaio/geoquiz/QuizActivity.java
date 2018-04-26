@@ -69,7 +69,7 @@ public class QuizActivity extends AppCompatActivity {
         mBtnFalso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checarResposta(true);
+                checarResposta(false);
                 removerPerguntas();
                 mostrarPontuacao();
             }

@@ -4,8 +4,8 @@
     <string name="btn_falso">Falso</string>
     <string name="btn_next">Próximo</string>
     <string name="btn_prev">Anterior</string>
-    <string name="correto_toast">A resposta é verdadeiro!</string>
-    <string name="incorreto_toast">A resposta é falsa!</string>
+    <string name="correto_toast">Você acertou!</string>
+    <string name="incorreto_toast">Você errou!</string>
 
     <!-- Questoes do GeoQuiz -->
     <string name="pergunta1">A cidade de Campina Grande fica localizado no estado da Paraíba?</string>
