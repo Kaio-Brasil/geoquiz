@@ -6,6 +6,7 @@
     <string name="btn_prev">Anterior</string>
     <string name="correto_toast">Você acertou!</string>
     <string name="incorreto_toast">Você errou!</string>
+    <string name="pontuacao">Pontuação</string>
 
     <!-- Questoes do GeoQuiz -->
     <string name="pergunta1">A cidade de Campina Grande fica localizado no estado da Paraíba?</string>

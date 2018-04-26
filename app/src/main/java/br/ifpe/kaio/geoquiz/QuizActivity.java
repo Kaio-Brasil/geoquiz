@@ -1,5 +1,8 @@
 package br.ifpe.kaio.geoquiz;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -115,9 +118,19 @@ public class QuizActivity extends AppCompatActivity {
 
     private void mostrarPontuacao() {
         if(mBancoPerguntas.length == 0) {
-            String mensagem = "Sua pontuação foi "+ mPontuacao;
-            Toast.makeText(this, mensagem, Toast.LENGTH_LONG).show();
             desabilitaBotoes();
+
+            AlertDialog alerta = new AlertDialog.Builder(this).create();
+            alerta.setTitle(R.string.pontuacao);
+            alerta.setMessage("Sua pontuação foi "+mPontuacao);
+            alerta.setButton(Dialog.BUTTON_POSITIVE, "Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    finish();
+                }
+            });
+            
+            alerta.show();
         }
     }
 

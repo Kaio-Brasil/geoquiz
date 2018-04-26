@@ -59,8 +59,8 @@
             android:layout_height="40dp"
             android:layout_marginEnd="5dp"
             android:src="@mipmap/arrow_left"
-            android:background="@color/colorPrimary"
-            android:contentDescription="@string/btn_prev"/>
+            android:contentDescription="@string/btn_prev"
+            android:background="@color/colorPrimary" />
 
         <ImageButton
             android:id="@+id/btn_proximo"
@@ -68,8 +68,8 @@
             android:layout_height="40dp"
             android:layout_marginStart="5dp"
             android:src="@mipmap/arrow_right"
-            android:background="@color/colorPrimary"
-            android:text="@string/btn_next"/>
+            android:contentDescription="@string/btn_next"
+            android:background="@color/colorPrimary" />
     </LinearLayout>
 
 </LinearLayout>
