@@ -2,9 +2,10 @@
     <string name="app_name">GeoQuiz</string>
     <string name="btn_verdadeiro">Verdadeiro</string>
     <string name="btn_falso">Falso</string>
-    <string name="btn_avancar">Avançar</string>
-    <string name="correto_toast">Correto!</string>
-    <string name="incorreto_toast">Incorreto!</string>
+    <string name="btn_next">Próximo</string>
+    <string name="btn_prev">Anterior</string>
+    <string name="correto_toast">A resposta é verdadeiro!</string>
+    <string name="incorreto_toast">A resposta é falsa!</string>
 
     <!-- Questoes do GeoQuiz -->
     <string name="pergunta1">A cidade de Campina Grande fica localizado no estado da Paraíba?</string>
@@ -12,4 +13,9 @@
     <string name="pergunta3">O estado do Amapá faz fronteira com dois estados?</string>
     <string name="pergunta4">A cidade do Rio de Janeiro já foi a capital do Brasil?</string>
     <string name="pergunta5">Pernambuco é o segundo maior estado em território do Nordeste?</string>
+    <string name="pergunta6">As cataratas do rio Iguaçu é um conjunto de 275 quedas de água?</string>
+    <string name="pergunta7">A cidade de São Paulo surgiu como missão jesuítica em janeiro de 1554?</string>
+    <string name="pergunta8">Recife é a capital mais antiga do Brasil?</string>
+    <string name="pergunta9">A região do centro-oeste é formada por 4 estados?</string>
+    <string name="pergunta10">A primeira cidade de Minas Gerais foi Ouro Preto?</string>
 </resources>
