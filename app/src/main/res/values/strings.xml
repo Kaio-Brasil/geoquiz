@@ -7,8 +7,10 @@
     <string name="correto_toast">Você acertou!</string>
     <string name="incorreto_toast">Você errou!</string>
     <string name="pontuacao">Pontuação</string>
+    <string name="perguntas_restantes">Perguntas restantes: </string>
+    <string name="quantidade">10</string>
 
-    <Questaotoes do GeoQuiz -->
+    <!-- Questaotoes do GeoQuiz -->
     <string name="pergunta1">A cidade de Campina Grande fica localizado no estado da Paraíba?</string>
     <string name="pergunta2">A floresta Amazônica passa por 8 estados?</string>
     <string name="pergunta3">O estado do Amapá faz fronteira com dois estados?</string>
@@ -19,4 +21,10 @@
     <string name="pergunta8">Recife é a capital mais antiga do Brasil?</string>
     <string name="pergunta9">A região do centro-oeste é formada por 4 estados?</string>
     <string name="pergunta10">A primeira cidade de Minas Gerais foi Ouro Preto?</string>
+
+    <!-- Acrecentando GeoQuiz4 -->
+    <string name="aviso">Tem certeza que quer fazer isso?</string>
+    <string name="btn_mostrar_resposta">Mostrar resposta</string>
+    <string name="btn_cheat">Trapacear!</string>
+    <string name="jugamento_toast">Trapacear é errado.</string>
 </resources>

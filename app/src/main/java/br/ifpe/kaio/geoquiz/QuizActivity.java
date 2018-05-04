@@ -1,7 +1,9 @@
 package br.ifpe.kaio.geoquiz;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,15 +14,22 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Random;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class QuizActivity extends AppCompatActivity {
+
     private static final String TAG = "QuizActivity";
+    private static final int REQUEST_CODE_CHEAT = 0;
+    private static final int REQUEST_CHEAT_CODE = 0;
+
     private Button mBtnVerdadeiro;
     private Button mBtnFalso;
     private ImageButton mBtnAnterior;
     private ImageButton mBtnProximo;
+    private Button mBtnCheat;
 
+    private TextView mPerguntasQuantidade;
     private TextView mQuestoesTextView;
 
     private Questao[] mBancoPerguntas = new Questao[] {
@@ -36,8 +45,10 @@ public class QuizActivity extends AppCompatActivity {
             new Questao(R.string.pergunta10, false)
     };
 
-    int mCurrentIndex = 0;
-    int mPontuacao = 0;
+    private boolean mCheater;
+
+    private int mCurrentIndex = 0;
+    private int mPontuacao = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,14 +56,10 @@ public class QuizActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate(Bundle) called");
         setContentView(R.layout.activity_quiz);
 
-        embaralharPerguntas();
+        Collections.shuffle(Arrays.asList(mBancoPerguntas));
+        mPerguntasQuantidade = (TextView) findViewById(R.id.pergunta_quantidade);
+
         mQuestoesTextView = (TextView) findViewById(R.id.pergunta_text_view);
-
-        mBtnVerdadeiro = (Button) findViewById(R.id.btn_true);
-        mBtnFalso = (Button) findViewById(R.id.btn_false);
-        mBtnAnterior = (ImageButton) findViewById(R.id.btn_anterior);
-        mBtnProximo = (ImageButton) findViewById(R.id.btn_proximo);
-
         mQuestoesTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,6 +70,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
+        mBtnVerdadeiro = (Button) findViewById(R.id.btn_true);
         mBtnVerdadeiro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,6 +80,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
+        mBtnFalso = (Button) findViewById(R.id.btn_false);
         mBtnFalso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,22 +90,37 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-
+        mBtnProximo = (ImageButton) findViewById(R.id.btn_proximo);
         mBtnProximo.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 mCurrentIndex = (mCurrentIndex + 1) % mBancoPerguntas.length;
+                mCheater = false;
                 atualizarPergunta();
             }
         });
 
+        mBtnAnterior = (ImageButton) findViewById(R.id.btn_anterior);
         mBtnAnterior.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                if(mCurrentIndex != 0) {
+                if(mCurrentIndex == 0) {
+                    mCurrentIndex = mBancoPerguntas.length - 1;
+                } else {
                     mCurrentIndex--;
                 }
+                mCheater = false;
                 atualizarPergunta();
+            }
+        });
+
+        mBtnCheat = (Button) findViewById(R.id.btn_cheat);
+        mBtnCheat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean resposta = mBancoPerguntas[mCurrentIndex].isResposta();
+                Intent intent = CheatActivity.newIntent(QuizActivity.this, resposta);
+                startActivityForResult(intent, REQUEST_CODE_CHEAT);
             }
         });
 
@@ -110,12 +134,17 @@ public class QuizActivity extends AppCompatActivity {
     private void checarResposta(boolean resultadoUsuario) {
         boolean resposta = mBancoPerguntas[mCurrentIndex].isResposta();
         int mensagemResId;
-        //int mensagemResId = (resposta == resultadoUsuario) ? R.string.correto_toast : R.string.incorreto_toast;
-        if(resposta == resultadoUsuario) {
-            mensagemResId = R.string.correto_toast;
+
+        if(mCheater) {
+            mensagemResId = R.string.jugamento_toast;
             mPontuacao++;
         } else {
-            mensagemResId = R.string.incorreto_toast;
+            if (resposta == resultadoUsuario) {
+                mensagemResId = R.string.correto_toast;
+                mPontuacao++;
+            } else {
+                mensagemResId = R.string.incorreto_toast;
+            }
         }
         Toast.makeText(this, mensagemResId, Toast.LENGTH_SHORT).show();
     }
@@ -145,18 +174,6 @@ public class QuizActivity extends AppCompatActivity {
         mBtnProximo.setEnabled(false);
     }
 
-    private void embaralharPerguntas() {
-        for(int i=0; i<(mBancoPerguntas.length - 1); i++) {
-            //Recebe um index aleatorio
-            int j = new Random().nextInt(mBancoPerguntas.length);
-
-            //Troca o conteudo das questões
-            Questao temporario = mBancoPerguntas[i];
-            mBancoPerguntas[i] = mBancoPerguntas[j];
-            mBancoPerguntas[j] = temporario;
-        }
-    }
-
     private void removerPerguntas() {
         if(mBancoPerguntas.length != 0) {
             Questao[] arrAuxiliar = new Questao[mBancoPerguntas.length - 1];
@@ -170,6 +187,21 @@ public class QuizActivity extends AppCompatActivity {
             }
             mBancoPerguntas = arrAuxiliar;
         }
+        mPerguntasQuantidade.setText(String.valueOf(mBancoPerguntas.length));
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent dados) {
+        if(resultCode != Activity.RESULT_OK) {
+            return;
+        }
+
+        if(requestCode == REQUEST_CHEAT_CODE) {
+            if(dados == null) {
+                return;
+            }
+            mCheater = CheatActivity.eRespostaMostrada(dados);
+        }
     }
 
     @Override
@@ -177,6 +209,7 @@ public class QuizActivity extends AppCompatActivity {
         super.onStart();
         Log.d(TAG, "onStart() called");
     }
+
     @Override
     protected void onResume(){
         super.onResume();

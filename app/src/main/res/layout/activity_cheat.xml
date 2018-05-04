@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context="br.ifpe.kaio.geoquiz.CheatActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/mensagem_aviso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/azul"
+            android:textSize="21sp"
+            android:text="@string/aviso" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <TextView
+            android:id="@+id/resposta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/azul"
+            android:textSize="21sp"
+            tools:text=""/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btn_mostrar_resposta"
+            android:layout_width="280dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="40dp"
+            android:background="@color/colorPrimary"
+            android:text="@string/btn_mostrar_resposta"
+            android:textColor="@color/branco"
+            android:textStyle="bold"
+            tools:ignore="ButtonStyle" />
+
+    </LinearLayout>
+
+</LinearLayout>
