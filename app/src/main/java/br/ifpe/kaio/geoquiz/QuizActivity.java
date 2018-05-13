@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -55,6 +56,7 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate(Bundle) called");
         setContentView(R.layout.activity_quiz);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         Collections.shuffle(Arrays.asList(mBancoPerguntas));
         mPerguntasQuantidade = (TextView) findViewById(R.id.pergunta_quantidade);
@@ -76,6 +78,10 @@ public class QuizActivity extends AppCompatActivity {
             public void onClick(View view) {
                 checarResposta(true);
                 removerPerguntas();
+                if(mBancoPerguntas.length != 0) {
+                    mCurrentIndex = (mCurrentIndex + 1) % mBancoPerguntas.length;
+                    atualizarPergunta();
+                }
                 mostrarPontuacao();
             }
         });
@@ -86,6 +92,10 @@ public class QuizActivity extends AppCompatActivity {
             public void onClick(View view) {
                 checarResposta(false);
                 removerPerguntas();
+                if(mBancoPerguntas.length != 0) {
+                    mCurrentIndex = (mCurrentIndex + 1) % mBancoPerguntas.length;
+                    atualizarPergunta();
+                }
                 mostrarPontuacao();
             }
         });
@@ -151,8 +161,6 @@ public class QuizActivity extends AppCompatActivity {
 
     private void mostrarPontuacao() {
         if(mBancoPerguntas.length == 0) {
-            desabilitaBotoes();
-
             AlertDialog alerta = new AlertDialog.Builder(this).create();
             alerta.setTitle(R.string.pontuacao);
             alerta.setMessage("Você acertou "+ mPontuacao +" perguntas.");
@@ -165,13 +173,6 @@ public class QuizActivity extends AppCompatActivity {
 
             alerta.show();
         }
-    }
-
-    private void desabilitaBotoes() {
-        mBtnVerdadeiro.setEnabled(false);
-        mBtnFalso.setEnabled(false);
-        mBtnAnterior.setEnabled(false);
-        mBtnProximo.setEnabled(false);
     }
 
     private void removerPerguntas() {
@@ -208,6 +209,7 @@ public class QuizActivity extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
         Log.d(TAG, "onStart() called");
+        atualizarPergunta();
     }
 
     @Override
