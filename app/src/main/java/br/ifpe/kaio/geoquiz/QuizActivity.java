@@ -76,7 +76,7 @@ public class QuizActivity extends AppCompatActivity {
         mBtnVerdadeiro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checarResposta(true);
+                filtrarResposta(true);
                 removerPerguntas();
                 if(mBancoPerguntas.length != 0) {
                     mCurrentIndex = (mCurrentIndex + 1) % mBancoPerguntas.length;
@@ -90,7 +90,7 @@ public class QuizActivity extends AppCompatActivity {
         mBtnFalso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checarResposta(false);
+                filtrarResposta(false);
                 removerPerguntas();
                 if(mBancoPerguntas.length != 0) {
                     mCurrentIndex = (mCurrentIndex + 1) % mBancoPerguntas.length;
@@ -141,6 +141,15 @@ public class QuizActivity extends AppCompatActivity {
         mQuestoesTextView.setText(questao);
     }
 
+    private void filtrarResposta(boolean resultadoUsuario) {
+        boolean resposta = mBancoPerguntas[mCurrentIndex].isResposta();
+
+        if(resposta != resultadoUsuario) {
+            mCheater = false;
+        }
+        checarResposta(resultadoUsuario);
+    }
+
     private void checarResposta(boolean resultadoUsuario) {
         boolean resposta = mBancoPerguntas[mCurrentIndex].isResposta();
         int mensagemResId;
@@ -148,8 +157,9 @@ public class QuizActivity extends AppCompatActivity {
         if(mCheater) {
             mensagemResId = R.string.jugamento_toast;
             mPontuacao++;
+            mCheater = false;
         } else {
-            if (resposta == resultadoUsuario) {
+            if(resposta == resultadoUsuario) {
                 mensagemResId = R.string.correto_toast;
                 mPontuacao++;
             } else {
